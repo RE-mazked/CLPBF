@@ -1,33 +1,37 @@
 #imnport lib
 import re
-class getInfo:
+"""class getInfoDictionary:
+    def __init__(self):
+        names = []
+        urlNames = input("Url of dictionary names [C:\\Users\\user\\dictionary\\keynames.txt]:")"""
+class getInfoInput:
     def __init__(self):
         #Key words to work with
         names = []
         namesIn = input("Names: ")
-        #While input names isn't empty will ask
+        #As long as input namesIn is not empty, keep getting input 
         while namesIn != '':
             names.append(namesIn)
             namesIn = input("Names: ")
         #Key numbers to work with
         numbers = []
         numbersIn = input("Numbers: ")
-        #While input numbers isn't empty will ask
+        #As long as input numbersIn is not empty, keep getting input
         while numbersIn != '':
             numbers.append(numbersIn)
             numbersIn = input("Numbers: ")
-        #Get direction to save the txt
-        urltxt = input("Where you wanna save the txt file with the passwords [C:\\pass.txt]: ")
+        #Get url to save the txt
+        urltxt = input("Where do you want to save the txt file with the passwords [C:\\pass.txt]: ")
         fileE = True
         while fileE:
             try:
                 open(f"{urltxt}", "x")
                 fileE = False
             except FileExistsError:
-                print("This file alredy exist.")
+                print("This file already exists.")
                 fileE = True
         makeList(names, numbers, urltxt)
-#Create a class that randomize and create the dictionari out a txt
+#Create a class that randomizes and creates the dictionary
 class makeList:
     ## INIT ##
     def __init__(self, namess, numberss, urltxt):
@@ -36,7 +40,7 @@ class makeList:
         #Set global vars
         self.namess = namess
         self.numberss = numberss
-        #Use functions and create the txt
+        #Use functions and create the dictionary
         for name1 in namess:
             for name2 in namess:
                 self.mixWords(name1, name2)
@@ -61,14 +65,14 @@ class makeList:
     #Collect words
     def joinWords(self, word1, word2):
         self.finalList.append(str(word1) + str(word2))
-    #Comprobate if is some caracter with findall re method
+    #Check if there is any character with re findall method
     def findWord(self, dic, text):
         x = re.findall(f"[{dic}]", text)
         if x:
             return True
         else:
             return False
-    #Put together from the vocals they share
+    #Join according the vocals they share
     def mixWords(self, word1, word2):
         l_word1 = list(word1.lower())
         l_word2 = list(word2.lower())
@@ -82,4 +86,4 @@ class makeList:
                     self.joinWords(str(part1), str(part2))
         
 if __name__ == '__main__':
-    getInfo()
+    getInfoInput()
